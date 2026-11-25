@@ -51,3 +51,16 @@ The application uses a simple data model with meaningful identifiers:
    - Grade level
 
 All data is stored in memory, which means data will be reset when the server restarts.
+
+## Backend Tests
+
+From the repository root, install the development dependencies and run the suite:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest
+```
+
+The backend tests live in `tests/backend/` and use FastAPI's TestClient without
+starting a server. Each test uses isolated in-memory activity data. The JavaScript
+frontend tests are separate and are not run by pytest.
