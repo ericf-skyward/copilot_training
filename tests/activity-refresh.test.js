@@ -92,9 +92,13 @@ async function setup({ rejectSignup = false } = {}) {
 }
 
 test("signup refreshes the participant list and availability without cached data", async () => {
+  // Arrange
   const { elements, getCount } = await setup();
+
+  // Act
   await elements["signup-form"].handlers.submit({ preventDefault() {} });
 
+  // Assert
   const card = elements["activities-list"].children[0];
   const participants = card.children[0].children[1].children;
   assert.equal(participants[0].children[0].textContent, "student@example.com");
@@ -105,9 +109,13 @@ test("signup refreshes the participant list and availability without cached data
 });
 
 test("failed signup leaves the activity list unchanged", async () => {
+  // Arrange
   const { elements, getCount } = await setup({ rejectSignup: true });
+
+  // Act
   await elements["signup-form"].handlers.submit({ preventDefault() {} });
 
+  // Assert
   const card = elements["activities-list"].children[0];
   assert.equal(card.children[0].children[1].textContent, "No participants yet.");
   assert.equal(getCount(), 1);
