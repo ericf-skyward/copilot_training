@@ -2,6 +2,41 @@
 
 _Get started using GitHub Copilot in less than an hour._
 
+## Windows inspirational quote notifications
+
+The standalone `src/quote-notifier.ps1` utility shows a random, locally stored
+inspirational quote as a Windows notification every four hours during the day:
+**8 AM, noon, and 4 PM, in your local time zone**, every day. It does not change
+the school activities website or require Python, extra packages, or internet access.
+
+On Windows 10 or 11, open PowerShell in this repository and run:
+
+```powershell
+# Preview a quote without showing a notification or installing anything.
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File .\src\quote-notifier.ps1 -Action Preview
+
+# Install (or update) the scheduled task for the current signed-in user.
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File .\src\quote-notifier.ps1 -Action Install
+
+# Show a notification now (only between 8 AM and 8 PM).
+powershell.exe -NoProfile -STA -ExecutionPolicy RemoteSigned -File .\src\quote-notifier.ps1
+
+# Remove the scheduled task.
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File .\src\quote-notifier.ps1 -Action Uninstall
+```
+
+Keep the script at the same location after installing; rerun `Install` if you move
+it. The task runs only while you are signed in, without administrator privileges
+or a continuously running background process. Missed notifications while asleep,
+powered off, or signed out are not replayed. Notifications outside 8 AM–8 PM are
+suppressed, including manual task runs.
+
+Allow notifications in Windows settings and turn off Do Not Disturb/Focus Assist
+if you do not see them. Windows controls the notification's display duration.
+If Windows marks a downloaded script as blocked, review it and use
+`Unblock-File .\src\quote-notifier.ps1` before running it. Organization execution
+policies may prevent scripts from running.
+
 ## Welcome
 
 - **Who is this for**: Developers at any experience level looking to accelerate their code workflow.
